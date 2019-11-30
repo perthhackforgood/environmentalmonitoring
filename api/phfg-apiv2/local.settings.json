@@ -3,6 +3,7 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=false",
     "CosmosDBConnection": "AccountEndpoint=https://localhost:8081/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
+    "StorageBlobConnectionString": "DefaultEndpointsProtocol=https;AccountName=perthhack4good;AccountKey=7xhwqxkt4VD9ncvRwiZ+LSzc8EmnBSIw2ee6Lr//bzyw64CjPeZCUGhLbAcmuXwKv1PgADeLiK4dlJuf/z+Q6g==;EndpointSuffix=core.windows.net",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet"
   }
 }
