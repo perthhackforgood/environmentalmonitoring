@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Xam.Plugin.Media">
+      <Version>4.0.1.5</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.3.0.991211" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.1" />
@@ -104,6 +107,11 @@
       <Project>{54709ABC-09DF-4C4E-81AE-6115B30BA12C}</Project>
       <Name>HackForGood</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\xml\file_paths.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

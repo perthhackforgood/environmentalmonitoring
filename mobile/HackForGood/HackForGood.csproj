@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
     <PackageReference Include="Xamarin.Forms" Version="4.3.0.991211" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
