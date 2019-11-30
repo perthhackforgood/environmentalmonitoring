@@ -7,18 +7,18 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
 
-namespace phfg_apiv2.api.UploadPhotoHttp
+namespace phfg.api.UploadPhotoHttp
 {
     public static class UploadPhotoHttp
     {
         [FunctionName("UploadPhoto")]
         public static async Task<HttpResponseMessage> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)]
-            HttpRequestMessage req,
+            HttpRequestMessage req, 
             TraceWriter log)
         {
             log.Info("C# HTTP trigger function processed a request.");
-            PhotoDetails photo = (PhotoDetails)await req.Content.ReadAsAsync<Object>();
+            PhotoDetails photo = (PhotoDetails)await req.Content.ReadAsAsync<PhotoDetails>();
 
             return photo == null
                 ? req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a name on the query string or in the request body")

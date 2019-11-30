@@ -19,8 +19,6 @@ namespace phfg_apiv2
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            string name = req.Query["name"];
-
             return (ActionResult)new OkObjectResult($"Hello World");
         }
     }
