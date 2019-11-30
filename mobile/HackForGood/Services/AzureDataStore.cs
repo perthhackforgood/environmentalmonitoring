@@ -9,64 +9,64 @@ using HackForGood.Models;
 
 namespace HackForGood.Services
 {
-    public class AzureDataStore : IDataStore<Item>
+    public class AzureDataStore : IDataStore<Photo>
     {
         HttpClient client;
-        IEnumerable<Item> items;
+        IEnumerable<Photo> photos;
 
         public AzureDataStore()
         {
             client = new HttpClient();
             client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
 
-            items = new List<Item>();
+            photos = new List<Photo>();
         }
 
         bool IsConnected => Connectivity.NetworkAccess == NetworkAccess.Internet;
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Photo>> GetItemsAsync(bool forceRefresh = false)
         {
             if (forceRefresh && IsConnected)
             {
                 var json = await client.GetStringAsync($"api/item");
-                items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Item>>(json));
+                photos = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Photo>>(json));
             }
 
-            return items;
+            return photos;
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Photo> GetItemAsync(string id)
         {
             if (id != null && IsConnected)
             {
                 var json = await client.GetStringAsync($"api/item/{id}");
-                return await Task.Run(() => JsonConvert.DeserializeObject<Item>(json));
+                return await Task.Run(() => JsonConvert.DeserializeObject<Photo>(json));
             }
 
             return null;
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddItemAsync(Photo photo)
         {
-            if (item == null || !IsConnected)
+            if (photo == null || !IsConnected)
                 return false;
 
-            var serializedItem = JsonConvert.SerializeObject(item);
+            var serializedItem = JsonConvert.SerializeObject(photo);
 
             var response = await client.PostAsync($"api/item", new StringContent(serializedItem, Encoding.UTF8, "application/json"));
 
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateItemAsync(Photo photo)
         {
-            if (item == null || item.Id == null || !IsConnected)
+            if (photo == null || photo.Id == null || !IsConnected)
                 return false;
 
-            var serializedItem = JsonConvert.SerializeObject(item);
+            var serializedItem = JsonConvert.SerializeObject(photo);
             var buffer = Encoding.UTF8.GetBytes(serializedItem);
             var byteContent = new ByteArrayContent(buffer);
 
-            var response = await client.PutAsync(new Uri($"api/item/{item.Id}"), byteContent);
+            var response = await client.PutAsync(new Uri($"api/item/{photo.Id}"), byteContent);
 
             return response.IsSuccessStatusCode;
         }
