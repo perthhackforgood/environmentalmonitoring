@@ -17,7 +17,11 @@ Install Azure SDK components
 - Install CosmosDB emulator: https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator-release-notes
 Installs a web-based UI to https://localhost:8081/_explorer/index.
 
-# Get Az Functions Publish Profile
+# Access Azure Resource Group and Az Functions
+- Request access to our Resource Group in Azure Portal - contact Deepak
+rg-ae-sponsorship-hack
+(under perthhackforgoodoutlook directory)
+
 - Go to the PHFG API: https://portal.azure.com/#blade/WebsitesExtension/FunctionsIFrameBlade/id/%2Fsubscriptions%2F09e2c0b1-3480-446f-8f33-81f7f510c865%2Fresourcegroups%2Frg-ae-sponsorship-hack%2Fproviders%2FMicrosoft.Web%2Fsites%2Fphfg-api 
 
 - Download publish profile
