@@ -5,7 +5,7 @@ The purpose of the hack was to produce a skeleton solution that could be evolved
 
 ## Building an Architecture with a Rainbow Pen! 
 
-![Building an architecture with rainbow pen](images/hack4good01.jpg)
+![Building an architecture with rainbow pen](Images/hack4good01.jpg)
 
 
 ## Event Detials
