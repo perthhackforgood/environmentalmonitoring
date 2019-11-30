@@ -7,6 +7,7 @@ namespace HackForGood.MobileAppService.Models
 {
     public class Photo
     {
+        public string Id { get; set; }
         public string ImageAsBase64Str { get; set; }
         public string DeviceId { get; set; }
         public double Latitude { get; set; }
