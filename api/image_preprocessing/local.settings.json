@@ -1,0 +1,8 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=perthhack4good;AccountKey=7xhwqxkt4VD9ncvRwiZ+LSzc8EmnBSIw2ee6Lr//bzyw64CjPeZCUGhLbAcmuXwKv1PgADeLiK4dlJuf/z+Q6g==;EndpointSuffix=core.windows.net",
+    "MyStorageConnectionAppSetting": "DefaultEndpointsProtocol=https;AccountName=perthhack4good;AccountKey=7xhwqxkt4VD9ncvRwiZ+LSzc8EmnBSIw2ee6Lr//bzyw64CjPeZCUGhLbAcmuXwKv1PgADeLiK4dlJuf/z+Q6g==;EndpointSuffix=core.windows.net"
+  }
+}
