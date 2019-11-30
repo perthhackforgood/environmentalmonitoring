@@ -6,10 +6,10 @@ namespace HackForGood.ViewModels
 {
     public class ItemDetailViewModel : BaseViewModel
     {
-        public Item Item { get; set; }
-        public ItemDetailViewModel(Item item = null)
+        public Photo Item { get; set; }
+        public ItemDetailViewModel(Photo item = null)
         {
-            Title = item?.Text;
+            Title = item?.Description;
             Item = item;
         }
     }

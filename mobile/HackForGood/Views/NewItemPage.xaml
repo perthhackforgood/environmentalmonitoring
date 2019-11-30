@@ -14,17 +14,15 @@
     
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">
-            <Label Text="Text" FontSize="Medium" />
-            <Entry Text="{Binding Item.Text}" d:Text="Item name" FontSize="Small" />
             <Label Text="Description" FontSize="Medium" />
-            <Editor Text="{Binding Item.Description}" d:Text="Item description" FontSize="Small" Margin="0" />
+            <Editor Text="{Binding Photo.Description}" d:Text="Item description" FontSize="Small" Margin="0" />
             <Label Text="Filename" FontSize="Small" />
-            <Label Text="{Binding Item.Filename}" d:Text="Item description" FontSize="Small" Margin="0" />
+            <Label Text="{Binding Photo.Filename}" d:Text="Item description" FontSize="Small" Margin="0" />
             <Label Text="Location" FontSize="Small" />
-            <Label Text="{Binding Item.Location.Latitude}" FontSize="Small" />
-            <Label Text="{Binding Item.Location.Longitude}" FontSize="Small" />
+            <Label Text="{Binding Photo.Latitude}" FontSize="Small" />
+            <Label Text="{Binding Photo.Longitude}" FontSize="Small" />
             <Label Text="Capture Time" FontSize="Small" />
-            <Label Text="{Binding Item.CaptureTime}" FontSize="Small" />
+            <Label Text="{Binding Item.TimeOfPhotoTaken}" FontSize="Small" />
         </StackLayout>
     </ContentPage.Content>
     

@@ -12,6 +12,8 @@ using HackForGood.Views;
 using HackForGood.ViewModels;
 using Plugin.Media;
 using Xamarin.Essentials;
+using Plugin.Media.Abstractions;
+using System.IO;
 
 namespace HackForGood.Views
 {
@@ -31,7 +33,7 @@ namespace HackForGood.Views
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Item;
+            var item = args.SelectedItem as Photo;
             if (item == null)
                 return;
 
@@ -66,14 +68,34 @@ namespace HackForGood.Views
             //    return stream;
             //});
             var location = await GetLocation();
-            var item = new Item()
+            var item = new Photo()
             {
                 Filename = file.Path,
-                Location = location,
-                CaptureTime = DateTime.Now
+                Latitude = location.Latitude,
+                Longitude = location.Longitude,
+                TimeOfPhotoTaken = DateTime.Now.ToString(),
+                DeviceId = Xamarin.Essentials.DeviceInfo.Model,
+                ImageAsBase64Str = GetImageContent(file)
             };
+
             await Navigation.PushModalAsync(new NavigationPage(new NewItemPage(item)));
         }
+        private string GetImageContent(MediaFile file)
+        {
+            byte[] bytes;
+            var stream = file.GetStream();
+
+            using (stream)
+            using (var memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                bytes = memoryStream.ToArray();
+            }
+
+            string base64 = Convert.ToBase64String(bytes);
+            return base64;
+        }
+
 
         protected override void OnAppearing()
         {
@@ -83,9 +105,9 @@ namespace HackForGood.Views
                 viewModel.LoadItemsCommand.Execute(null);
         }
 
-        private async Task<Location> GetLocation()
+        private async Task<Xamarin.Essentials.Location> GetLocation()
         {
-            Location location = null;
+            Xamarin.Essentials.Location location = null;
             try
             {
                 location = await Geolocation.GetLastKnownLocationAsync();

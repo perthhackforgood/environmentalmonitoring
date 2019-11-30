@@ -14,13 +14,13 @@ namespace HackForGood.Views
     [DesignTimeVisible(false)]
     public partial class NewItemPage : ContentPage
     {
-        public Item Item { get; set; }
+        public Photo Photo { get; set; }
 
-        public NewItemPage(Item item)
+        public NewItemPage(Photo photo)
         {
             InitializeComponent();
 
-            Item = item;
+            Photo = photo;
 
             BindingContext = this;
 
@@ -34,7 +34,7 @@ namespace HackForGood.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", Item);
+            MessagingCenter.Send(this, "AddItem", Photo);
             await Navigation.PopModalAsync();
         }
 

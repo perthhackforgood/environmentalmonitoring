@@ -12,7 +12,7 @@ namespace HackForGood.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
+        public IDataStore<Photo> DataStore => DependencyService.Get<IDataStore<Photo>>();
 
         bool isBusy = false;
         public bool IsBusy
