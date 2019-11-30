@@ -328,3 +328,5 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+api/__azurite_db_blob__.json
+api/__azurite_db_table__.json

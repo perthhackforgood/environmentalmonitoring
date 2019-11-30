@@ -14,8 +14,22 @@ Install Azure SDK components
 
 - Install Azure Storage Explorer tool from https://azure.microsoft.com/en-us/features/storage-explorer/
 
+- Install node.js
+
+- Clone the repo into a local dev folder:
+```
+cd c:\Development\phfg
+git clone https://github.com/perthhackforgood/environmentalmonitoring.git
+```
+
+- Install the Azurite v2.7 Azure storage emulator npm
+This supercedes Azure Storage Emulator, but legacy v2x is needed to support the CosmosDB Tables API
+`npm i -g azurite@2.7`
+Then before starting your Function app, run
+`azurite`
+
 - Install CosmosDB emulator: https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator-release-notes
-Installs a web-based UI to https://localhost:8081/_explorer/index.
+Installs a web-based UI to https://localhost:8081/_explorer/index
 
 # Access Azure Resource Group and Az Functions
 - Request access to our Resource Group in Azure Portal - contact Deepak
