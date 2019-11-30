@@ -1,0 +1,19 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "name": "inputBlob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "raw/{name}",
+      "connection": "MyStorageConnectionAppSetting"
+    },
+    {
+      "name": "outputBlob",
+      "type": "blob",
+      "direction": "out",
+      "path": "pre-processed/{name}",
+      "connection": "MyStorageConnectionAppSetting"
+    }
+  ]
+}
