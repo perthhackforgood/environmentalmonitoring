@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -14,15 +15,23 @@ namespace phfg.api.UploadPhotoHttp
         [FunctionName("UploadPhoto")]
         public static async Task<HttpResponseMessage> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)]
-            HttpRequestMessage req, 
+            HttpRequestMessage req,
+
+            [Blob("raw/{name}", FileAccess.Write)]
+            Stream outputImage,
+
             TraceWriter log)
         {
             log.Info("C# HTTP trigger function processed a request.");
             PhotoDetails photo = (PhotoDetails)await req.Content.ReadAsAsync<PhotoDetails>();
 
-            return photo == null
-                ? req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a name on the query string or in the request body")
-                : req.CreateResponse(HttpStatusCode.OK, "Hello " + photo.DeviceId);
+            if (photo == null)
+                return req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a name on the query string or in the request body");
+
+            var bytes = Convert.FromBase64String(photo.ImageAsBase64Str);
+            outputImage = new MemoryStream(bytes);
+
+            return req.CreateResponse(HttpStatusCode.OK, "Hello " + photo.DeviceId);
         }
     }
 
