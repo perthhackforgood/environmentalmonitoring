@@ -20,6 +20,8 @@ namespace HackForGood.Models
         public IEnumerable<Photo> GetAll()
         {
             //TODO: Call Azure Function
+
+
             return photos.Values;
         }
 
