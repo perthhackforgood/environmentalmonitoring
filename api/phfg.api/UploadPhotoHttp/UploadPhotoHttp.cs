@@ -18,7 +18,7 @@ namespace phfg.api.UploadPhotoHttp
             TraceWriter log)
         {
             log.Info("C# HTTP trigger function processed a request.");
-            PhotoDetails photo = (PhotoDetails)await req.Content.ReadAsAsync<Object>();
+            PhotoDetails photo = (PhotoDetails)await req.Content.ReadAsAsync<PhotoDetails>();
 
             return photo == null
                 ? req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a name on the query string or in the request body")
