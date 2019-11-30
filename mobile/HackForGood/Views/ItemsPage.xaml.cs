@@ -10,6 +10,8 @@ using Xamarin.Forms.Xaml;
 using HackForGood.Models;
 using HackForGood.Views;
 using HackForGood.ViewModels;
+using Plugin.Media;
+using Xamarin.Essentials;
 
 namespace HackForGood.Views
 {
@@ -41,7 +43,36 @@ namespace HackForGood.Views
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                DisplayAlert("No Camera", ":( No camera available.", "OK");
+                return;
+            }
+
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            {
+                Directory = "Sample",
+                Name = "test.jpg"
+            });
+
+            if (file == null)
+                return;
+
+            //image.Source = ImageSource.FromStream(() =>
+            //{
+            //    var stream = file.GetStream();
+            //    return stream;
+            //});
+            var location = await GetLocation();
+            var item = new Item()
+            {
+                Filename = file.Path,
+                Location = location,
+                CaptureTime = DateTime.Now
+            };
+            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage(item)));
         }
 
         protected override void OnAppearing()
@@ -51,5 +82,37 @@ namespace HackForGood.Views
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
         }
+
+        private async Task<Location> GetLocation()
+        {
+            Location location = null;
+            try
+            {
+                location = await Geolocation.GetLastKnownLocationAsync();
+
+                if (location != null)
+                {
+                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                }
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+            }
+            catch (FeatureNotEnabledException fneEx)
+            {
+                // Handle not enabled on device exception
+            }
+            catch (PermissionException pEx)
+            {
+                // Handle permission exception
+            }
+            catch (Exception ex)
+            {
+                // Unable to get location
+            }
+            return location;
+        }
     }
+    
 }

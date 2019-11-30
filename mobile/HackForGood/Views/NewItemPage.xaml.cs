@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using HackForGood.Models;
+using Plugin.Media.Abstractions;
 
 namespace HackForGood.Views
 {
@@ -15,17 +16,20 @@ namespace HackForGood.Views
     {
         public Item Item { get; set; }
 
-        public NewItemPage()
+        public NewItemPage(Item item)
         {
             InitializeComponent();
 
-            Item = new Item
-            {
-                Text = "Item name",
-                Description = "This is an item description."
-            };
+            Item = item;
 
             BindingContext = this;
+
+            //image.Source = ImageSource.FromStream(() =>
+            //{
+            //    var stream = file.GetStream();
+            //    file.Dispose();
+            //    return stream;
+            //});
         }
 
         async void Save_Clicked(object sender, EventArgs e)

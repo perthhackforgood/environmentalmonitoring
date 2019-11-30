@@ -18,6 +18,13 @@
             <Entry Text="{Binding Item.Text}" d:Text="Item name" FontSize="Small" />
             <Label Text="Description" FontSize="Medium" />
             <Editor Text="{Binding Item.Description}" d:Text="Item description" FontSize="Small" Margin="0" />
+            <Label Text="Filename" FontSize="Small" />
+            <Label Text="{Binding Item.Filename}" d:Text="Item description" FontSize="Small" Margin="0" />
+            <Label Text="Location" FontSize="Small" />
+            <Label Text="{Binding Item.Location.Latitude}" FontSize="Small" />
+            <Label Text="{Binding Item.Location.Longitude}" FontSize="Small" />
+            <Label Text="Capture Time" FontSize="Small" />
+            <Label Text="{Binding Item.CaptureTime}" FontSize="Small" />
         </StackLayout>
     </ContentPage.Content>
     
