@@ -24,7 +24,7 @@ namespace HackForGood.MobileAppService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSingleton<IItemRepository, ItemRepository>();
+            services.AddSingleton<IPhotoRepository, PhotoRepository>();
 
             services.AddSwaggerGen(c =>
             {

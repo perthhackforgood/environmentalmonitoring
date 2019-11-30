@@ -11,9 +11,9 @@ namespace HackForGood.Controllers
     [ApiController]
     public class ItemController : ControllerBase
     {
-        private readonly IItemRepository ItemRepository;
+        private readonly IPhotoRepository ItemRepository;
 
-        public ItemController(IItemRepository itemRepository)
+        public ItemController(IPhotoRepository itemRepository)
         {
             ItemRepository = itemRepository;
         }
