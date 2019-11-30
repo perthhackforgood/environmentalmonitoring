@@ -1,0 +1,12 @@
+﻿{
+  "bindings": [
+    {
+      "name": "myBlob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "raw/{name}",
+      "connection": "perthhack4good_STORAGE"
+    }
+  ],
+  "disabled": false
+}
