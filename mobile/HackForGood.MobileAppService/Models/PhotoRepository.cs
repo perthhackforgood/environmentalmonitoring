@@ -12,11 +12,12 @@ namespace HackForGood.Models
         private static ConcurrentDictionary<string, Photo> photos =
             new ConcurrentDictionary<string, Photo>();
         private static HttpClient _httpClient = new HttpClient();
+        private static string _publishEndpoint = "https://phfg-api.azurewebsites.net/api/UploadPhoto";
 
         public PhotoRepository()
         {
             _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
-            _httpClient.DefaultRequestHeaders.Add("Content-Type", "application/json");
+            //_httpClient.DefaultRequestHeaders.Add("Content-Type", "application/json");
         }
 
         public IEnumerable<Photo> GetAll()
@@ -26,12 +27,26 @@ namespace HackForGood.Models
 
         public async void Publish(Photo photo)
         {
-            //TODO: Call Azure Function
-            var request = new HttpRequestMessage();
+            try
+            {
+                var requestContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(photo), System.Text.Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await _httpClient.SendAsync(request);
+                HttpResponseMessage response = await _httpClient.PostAsync(_publishEndpoint, requestContent);
 
-            photo.Id = Guid.NewGuid().ToString();
+                //"Hello 066f7801-fcb2-4b5e-b33f-634dac26eef8"
+                //TODO: This will change but for now, it is as above.
+
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var responseContentArray = responseContent.Split(' ');
+                photo.Id = responseContentArray[1].Replace("\"", "");
+            }
+            catch (Exception ex)
+            {
+                //TODO: Send to AppInsights?
+
+                photo.Id = "Error";
+            }
+
             photos[photo.Id] = photo;
         }
 
